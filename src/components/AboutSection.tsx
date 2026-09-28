@@ -12,7 +12,7 @@ export function AboutSection({ about }: AboutSectionProps) {
       aria-labelledby="about-title"
     >
       <div className="mx-auto max-w-[1440px]">
-        <div className="mb-space-xl border-t border-rule pt-space-xl">
+        <div className="mb-space-xl">
           <span className="text-label-sm uppercase text-muted">About</span>
         </div>
 

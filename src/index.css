@@ -49,7 +49,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  main > section {
+  main>section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
     min-height: 100svh;
@@ -67,6 +67,7 @@
 }
 
 @layer utilities {
+
   /*
    * Liquid Glass 顶栏（参考 liquid-glass-react）：
    * 先写 blur+saturate 回退，再写带 url(#liquid-lens) 的声明；
@@ -101,17 +102,15 @@
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    background: linear-gradient(
-      135deg,
-      var(--lg-sheen) 0%,
-      transparent 42%,
-      transparent 58%,
-      rgba(255, 255, 255, 0.12) 100%
-    );
+    background: linear-gradient(135deg,
+        var(--lg-sheen) 0%,
+        transparent 42%,
+        transparent 58%,
+        rgba(255, 255, 255, 0.12) 100%);
     z-index: 0;
   }
 
-  .liquid-glass > * {
+  .liquid-glass>* {
     position: relative;
     z-index: 1;
   }

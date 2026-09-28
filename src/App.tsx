@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react'
 import { AboutSection } from './components/AboutSection'
 import { ChapterSection } from './components/ChapterSection'
-import { IndexPanel } from './components/IndexPanel'
 import { LiquidGlassFilter } from './components/LiquidGlassFilter'
 import { ScrollArrow } from './components/ScrollArrow'
 import { SectionRail } from './components/SectionRail'
-import {
-  SiteHeader,
-  useScrollActivity,
-  useScrollDirectionHeader,
-} from './components/SiteHeader'
+import { useScrollActivity } from './components/SiteHeader'
 import { siteContent } from './content/site'
 
 const sectionIds = [...siteContent.chapters.map((chapter) => chapter.id), siteContent.about.id]
@@ -27,9 +22,7 @@ const railItems = [
 
 export default function App() {
   const [activeId, setActiveId] = useState(sectionIds[0])
-  const [indexOpen, setIndexOpen] = useState(false)
   const [atBottom, setAtBottom] = useState(false)
-  const headerVisible = useScrollDirectionHeader(indexOpen)
   const railVisible = useScrollActivity()
 
   useEffect(() => {
@@ -57,29 +50,9 @@ export default function App() {
     }
   }, [])
 
-  useEffect(() => {
-    if (!indexOpen) return
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIndexOpen(false)
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [indexOpen])
-
   return (
     <div className="min-h-screen bg-background text-on-surface antialiased">
       <LiquidGlassFilter />
-      <SiteHeader
-        siteName={siteContent.siteName}
-        activeId={activeId}
-        visible={headerVisible}
-        onOpenIndex={() => setIndexOpen(true)}
-      />
-      <IndexPanel
-        open={indexOpen}
-        chapters={siteContent.chapters}
-        onClose={() => setIndexOpen(false)}
-      />
       <SectionRail items={railItems} activeId={activeId} visible={railVisible} />
 
       <main className="w-full bg-background">
@@ -87,7 +60,7 @@ export default function App() {
           <ChapterSection key={chapter.id} chapter={chapter} />
         ))}
         <AboutSection about={siteContent.about} />
-        <footer className="border-t border-rule" aria-hidden />
+        <footer aria-hidden />
       </main>
 
       <ScrollArrow

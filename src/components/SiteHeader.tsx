@@ -2,62 +2,25 @@ import { useEffect, useRef, useState } from 'react'
 
 type SiteHeaderProps = {
   siteName: string
-  activeId: string
   visible: boolean
-  onOpenIndex: () => void
 }
 
-export function SiteHeader({
-  siteName,
-  activeId,
-  visible,
-  onOpenIndex,
-}: SiteHeaderProps) {
-  const onAbout = activeId === 'about'
-
+/** 顶栏仅作标识：两端灰色字，暂无跳转/目录功能 */
+export function SiteHeader({ siteName, visible }: SiteHeaderProps) {
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 px-margin-mobile pt-2 transition-transform duration-300 ease-out md:px-margin ${
-        visible ? 'translate-y-0' : 'pointer-events-none -translate-y-[120%]'
+      className={`pointer-events-none fixed inset-x-0 top-0 z-50 px-margin-mobile pt-2 transition-transform duration-300 ease-out md:px-margin ${
+        visible ? 'translate-y-0' : '-translate-y-[120%]'
       }`}
       aria-hidden={!visible}
     >
-      <div className="liquid-glass mx-auto flex h-9 max-w-[420px] items-center justify-center rounded-full px-space-md md:h-10 md:max-w-[480px]">
-        <nav
-          className="flex items-center gap-space-md md:gap-space-lg"
-          aria-label="主导航"
-        >
-          <a
-            href="#section-01"
-            tabIndex={visible ? 0 : -1}
-            className={`text-label-md uppercase tracking-wider transition-colors ${
-              !onAbout
-                ? 'font-bold text-carbon'
-                : 'text-on-surface-variant hover:text-on-surface'
-            }`}
-          >
-            {siteName}
-          </a>
-          <a
-            href="#about"
-            tabIndex={visible ? 0 : -1}
-            className={`text-label-md uppercase tracking-wider transition-colors ${
-              onAbout
-                ? 'font-bold text-carbon'
-                : 'text-on-surface-variant hover:text-on-surface'
-            }`}
-          >
-            About
-          </a>
-          <button
-            type="button"
-            tabIndex={visible ? 0 : -1}
-            onClick={onOpenIndex}
-            className="text-label-md uppercase tracking-wider text-on-surface-variant transition-colors hover:text-on-surface"
-          >
-            Index
-          </button>
-        </nav>
+      <div className="liquid-glass mx-auto flex h-9 max-w-[420px] items-center justify-between rounded-full px-space-md md:h-10 md:max-w-[480px]">
+        <span className="text-label-md uppercase tracking-wider text-on-surface-variant">
+          {siteName}
+        </span>
+        <span className="text-label-md uppercase tracking-wider text-on-surface-variant">
+          About
+        </span>
       </div>
     </header>
   )
@@ -65,7 +28,7 @@ export function SiteHeader({
 
 /**
  * 下滑隐藏、上滑显示（常见滚动方向导航模式）。
- * 接近顶部时始终显示；打开 Index 时强制显示。
+ * 接近顶部时始终显示。
  */
 export function useScrollDirectionHeader(forceVisible = false) {
   const [visible, setVisible] = useState(true)
