@@ -28,6 +28,9 @@ export type SiteContent = {
   }
 }
 
+/** Vite base，GitHub Pages 为 `/journey/`，本地为 `/` */
+const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+
 /**
  * 站点内容与页面表现分开存放。
  * 文案来自用户提供的天赐庄游记；图片来自 Wikimedia Commons（苏州大学相关公开照片）。
@@ -41,7 +44,7 @@ export const siteContent: SiteContent = {
       label: '南门入校',
       title: '最美校园，天赐庄',
       layout: 'prologue',
-      image: '/images/section-01.jpg',
+      image: asset('images/section-01.jpg'),
       imageAlt: '苏州大学天赐庄校区大草坪与钟楼远景',
       body: [
         '苏州大学有最美校园之一的称号，实际上指代的是天赐庄校区。我虽作为南京铁道学院苏州校区的一员，却驻扎在苏州城外的阳澄湖，鲜有去城内苏州大学参观的契机，即使去了，也是为了考试，可谓是来去匆匆，没有驻足欣赏，连走马观花都算不上。所幸，这天阳光和煦，我也有得是时间，于是誓要把我久闻其名、不见其景的兄弟学校游览一遍。',
@@ -54,7 +57,7 @@ export const siteContent: SiteContent = {
       label: '旧体育馆',
       title: '黑石点缀红砖',
       layout: 'interlude',
-      image: '/images/section-02.jpg',
+      image: asset('images/section-02.jpg'),
       imageAlt: '苏州大学博物馆，原东吴大学司马德体育馆外墙',
       imageCaption: '司马德体育馆旧址',
       body: [
@@ -68,7 +71,7 @@ export const siteContent: SiteContent = {
       label: '林堂',
       title: '钟楼：美丽符号',
       layout: 'interlude',
-      image: '/images/section-03.jpg',
+      image: asset('images/section-03.jpg'),
       imageAlt: '苏州大学钟楼林堂近景：花窗、拱门与旗杆',
       imageCaption: '初称「林堂」',
       body: [
@@ -82,7 +85,7 @@ export const siteContent: SiteContent = {
       label: '文星阁',
       title: '方塔对视',
       layout: 'monologue',
-      image: '/images/section-04.jpg',
+      image: asset('images/section-04.jpg'),
       imageAlt: '苏州大学天赐庄校区文星阁（方塔）',
       overlayTitle: '文星宝阁',
       overlayBody:
@@ -97,7 +100,7 @@ export const siteContent: SiteContent = {
     id: 'about',
     name: 'Purestone',
     role: '',
-    image: '/images/about.jpg',
+    image: asset('images/about.jpg'),
     imageAlt: 'Purestone GitHub 主页插画',
     paragraphs: [
       'But I still',

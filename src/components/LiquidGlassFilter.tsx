@@ -11,7 +11,7 @@ export function LiquidGlassFilter() {
       <defs>
         <filter id="liquid-lens" x="-5%" y="-20%" width="110%" height="140%" colorInterpolationFilters="sRGB">
           <feImage
-            href="/liquid-lens-map.png"
+            href={`${import.meta.env.BASE_URL}liquid-lens-map.png`}
             x="0"
             y="0"
             width="100%"
