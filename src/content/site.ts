@@ -98,7 +98,7 @@ export const siteContent: SiteContent = {
   ],
   about: {
     id: 'about',
-    name: 'Purestone',
+    name: 'Wanderer',
     role: '',
     image: asset('images/about.jpg'),
     imageAlt: 'Purestone GitHub 主页插画',
