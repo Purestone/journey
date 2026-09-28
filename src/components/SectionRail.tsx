@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 type SectionRailItem = {
   id: string
   label: string
@@ -9,8 +11,10 @@ type SectionRailProps = {
   visible: boolean
 }
 
-/** 右侧细线进度轨：滑动时显示，停滑后隐藏 */
+/** 右侧细线进度轨：滑动或鼠标移入时显示，离开且停滑后隐藏 */
 export function SectionRail({ items, activeId, visible }: SectionRailProps) {
+  const [hovered, setHovered] = useState(false)
+  const shown = visible || hovered
   const activeIndex = Math.max(
     0,
     items.findIndex((item) => item.id === activeId),
@@ -19,16 +23,14 @@ export function SectionRail({ items, activeId, visible }: SectionRailProps) {
   return (
     <nav
       aria-label="段落进度"
-      aria-hidden={!visible}
-      className={`pointer-events-none fixed top-1/2 right-4 z-30 hidden -translate-y-1/2 transition-opacity duration-300 md:right-6 md:block ${
-        visible ? 'opacity-100' : 'opacity-0'
+      aria-hidden={!shown}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`fixed top-1/2 right-0 z-30 hidden h-56 w-10 -translate-y-1/2 items-center justify-center transition-opacity duration-300 md:flex ${
+        shown ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <div
-        className={`relative flex h-40 w-3 flex-col items-center ${
-          visible ? 'pointer-events-auto' : 'pointer-events-none'
-        }`}
-      >
+      <div className="relative flex h-40 w-3 flex-col items-center">
         <div className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-outline-variant/50" />
         <div
           className="absolute left-1/2 w-px -translate-x-1/2 bg-carbon transition-[height] duration-300 ease-out"
@@ -46,7 +48,7 @@ export function SectionRail({ items, activeId, visible }: SectionRailProps) {
                   href={`#${item.id}`}
                   aria-label={item.label}
                   aria-current={isActive ? 'true' : undefined}
-                  tabIndex={visible ? 0 : -1}
+                  tabIndex={shown ? 0 : -1}
                   className={`block h-1.5 w-1.5 rounded-full transition-all duration-200 ${
                     isActive
                       ? 'scale-125 bg-carbon'
