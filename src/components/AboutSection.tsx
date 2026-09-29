@@ -38,6 +38,10 @@ export function AboutSection({ about }: AboutSectionProps) {
             </div>
           </div>
         </div>
+
+        <div className="mt-space-2xl">
+          <span aria-hidden className="block h-px w-8 bg-muted" />
+        </div>
       </div>
     </section>
   )

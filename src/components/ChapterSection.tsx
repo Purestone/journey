@@ -34,6 +34,7 @@ function Prologue({ chapter }: { chapter: Chapter }) {
   return (
     <div className="flex w-full flex-1 flex-col justify-between">
       <div className="mb-space-md">
+        <span aria-hidden className="mb-space-xs block h-px w-8 bg-muted" />
         <span className="text-label-sm uppercase text-muted">Journey</span>
       </div>
       <div className="relative min-h-[460px] max-h-[70vh] w-full overflow-hidden bg-surface-container aspect-[21/9]">
